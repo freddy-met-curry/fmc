@@ -10,8 +10,6 @@ odoo_addons_directories:
   - env/enterprise
   - env/community/odoo/addons
   - env/community/addons
-  - addons-community
-  - addons-community/oca
 
 custom_addons_directories:
   - addons
