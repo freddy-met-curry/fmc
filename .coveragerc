@@ -7,7 +7,6 @@ omit =
         */community/*
         */enterprise/*
         */python3.5/*
-        *addons-community/*
 
 [report]
 omit =
@@ -18,7 +17,6 @@ omit =
         */community/*
         */enterprise/*
         */python3.5/*
-        *addons-community/*
         */tests/*
 skip_covered = True
 show_missing = True
