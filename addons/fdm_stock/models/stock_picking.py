@@ -11,4 +11,4 @@ class StockPicking(models.Model):
     @api.depends('partner_id')
     def _compute_customer(self):
         for record in self:
-            record.customer_id = record.partner_id.parent_id
+            record.customer_id = record.partner_id.parent_id or record.partner_id
