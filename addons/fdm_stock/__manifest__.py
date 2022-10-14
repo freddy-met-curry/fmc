@@ -18,7 +18,7 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'fred_stock/static/src/calendar_renderer.js',
+            'fdm_stock/static/src/calendar_renderer.js',
         ],
     },
     'installable': True,
