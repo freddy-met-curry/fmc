@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="fdm_extra_info_inherit" inherit_id="website_sale.extra_info">
+        <xpath expr="//div[hasclass('s_website_form_rows')]" position="inside">
+        <div class="input-group datetimepickerExtraInfo" id="datetimepickerExtraInfo" data-target-input="nearest"
+                t-att-data-mindate="mindate"
+                t-att-data-maxdate="maxdate">
+            <input type="text" class="form-control datetimepicker-input o_survey_question_date bg-transparent text-dark rounded-0 p-0"
+                   t-attf-data-target="#datetimepickerExtraInfo" name="datetimepickerExtraInfo"
+                   />
+            <div t-if="not survey_form_readonly" class="input-group-append position-absolute" t-attf-data-target="#datetimepickerExtraInfo" data-toggle="datetimepicker">
+                <div class="input-group-text text-primary border-0 bg-transparent p-0"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+        </xpath>
+    </template>
+</odoo>
