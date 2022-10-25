@@ -5,6 +5,7 @@ from odoo.addons.website.controllers.form import WebsiteForm
 from odoo.http import request
 from datetime import datetime
 
+
 class WebsiteSale(main.WebsiteSale):
 
     @http.route()
@@ -15,6 +16,7 @@ class WebsiteSale(main.WebsiteSale):
         if mindate:
             result.qcontext['mindate'] = mindate
         return result
+
 
 class WebsiteSaleForm(WebsiteForm):
     @http.route()
