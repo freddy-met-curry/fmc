@@ -9,6 +9,8 @@
     'category': 'Sales',
     'license': 'LGPL-3',
     'depends': [
+        'base',
+        'web',
         'website',
         'website_sale',
 
