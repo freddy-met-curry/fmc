@@ -22,6 +22,7 @@
     },
     'data': [
         'views/res_config_settings_views.xml',
+        'views/sale_order_view.xml',
         'views/template_extra_infos.xml',
     ],
     'installable': True,

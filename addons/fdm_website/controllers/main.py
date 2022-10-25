@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from odoo import http
 from odoo.addons.website_sale.controllers import main
+from odoo.addons.website.controllers.form import WebsiteForm
 from odoo.http import request
-
+from datetime import datetime
 
 class WebsiteSale(main.WebsiteSale):
 
@@ -14,3 +15,12 @@ class WebsiteSale(main.WebsiteSale):
         if mindate:
             result.qcontext['mindate'] = mindate
         return result
+
+class WebsiteSaleForm(WebsiteForm):
+    @http.route()
+    def website_form_saleorder(self, **kwargs):
+        if kwargs.get('datetimepickerExtraInfo'):
+            order = request.website.sale_get_order()
+            date = datetime.strptime(kwargs.get('datetimepickerExtraInfo'), '%m/%d/%Y').date()
+            order.write({'min_delay': date})
+        return super(WebsiteSaleForm, self).website_form_saleorder(**kwargs)

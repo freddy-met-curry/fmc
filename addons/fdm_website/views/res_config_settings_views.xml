@@ -9,7 +9,7 @@
                 <div class="col-xs-12 col-lg-6 o_setting_box" id="min_delay_setting">
                     <div class="o_setting_left_pane"/>
                     <div class="o_setting_right_pane">
-                        <span class="o_form_label">Min delay</span>
+                        <span class="o_form_label">Management of order dates</span>
                         <div class="content-group">
                             <div class="row mt16">
                                 <label for="min_delay"
