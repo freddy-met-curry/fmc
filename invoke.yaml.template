@@ -12,6 +12,7 @@ odoo_addons_directories:
   - env/community/addons
 
 custom_addons_directories:
+  - addons
 
 odoo_languages:
   - en_US
