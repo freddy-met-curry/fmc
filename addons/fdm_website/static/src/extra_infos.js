@@ -20,7 +20,6 @@ publicWidget.registry.datepicker = publicWidget.Widget.extend({
             minDate: minDate,
         });
 
-
     },
 
 });

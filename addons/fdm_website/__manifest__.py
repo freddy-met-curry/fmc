@@ -1,4 +1,3 @@
-
 # Copyright 2022 Eezee-IT (<http://www.eezee-it.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
@@ -18,7 +17,7 @@
     'assets': {
         'web.assets_frontend': [
             'fdm_website/static/src/extra_infos.js',
-            ]
+        ]
     },
     'data': [
         'views/res_config_settings_views.xml',
