@@ -3,7 +3,7 @@ from odoo import http
 from odoo.addons.website_sale.controllers import main
 from odoo.addons.website.controllers.form import WebsiteForm
 from odoo.http import request
-from datetime import datetime
+from datetime import date, timedelta
 
 
 class WebsiteSale(main.WebsiteSale):
@@ -23,6 +23,6 @@ class WebsiteSaleForm(WebsiteForm):
     def website_form_saleorder(self, **kwargs):
         if kwargs.get('datetimepickerExtraInfo'):
             order = request.website.sale_get_order()
-            date = datetime.strptime(kwargs.get('datetimepickerExtraInfo'), '%m/%d/%Y').date()
-            order.write({'min_delay': date})
+            date_min = date.today() + timedelta(days=kwargs.get('datetimepickerExtraInfo'))
+            order.write({'min_delay': date_min})
         return super(WebsiteSaleForm, self).website_form_saleorder(**kwargs)
