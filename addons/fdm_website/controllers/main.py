@@ -5,6 +5,7 @@ from odoo.addons.website.controllers.form import WebsiteForm
 from odoo.http import request
 from datetime import date, timedelta, datetime
 
+
 class WebsiteSale(main.WebsiteSale):
 
     @http.route()
