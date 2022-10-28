@@ -14,7 +14,8 @@ class WebsiteSale(main.WebsiteSale):
         config_parameter = request.env['ir.config_parameter'].sudo()
         mindate = config_parameter.get_param('fdm_website.min_delay', 'False')
         if mindate:
-            result.qcontext['mindate'] = mindate
+            date_min = date.today() + timedelta(days=int(mindate))
+            result.qcontext['mindate'] = date_min
         return result
 
 
