@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from odoo import http, fields
+from odoo import http
 from odoo.addons.website_sale.controllers import main
 from odoo.addons.website.controllers.form import WebsiteForm
 from odoo.http import request
 from datetime import date, timedelta, datetime
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class WebsiteSale(main.WebsiteSale):
