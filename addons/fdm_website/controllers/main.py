@@ -8,13 +8,24 @@ from datetime import date, timedelta, datetime
 
 class WebsiteSale(main.WebsiteSale):
 
+    def get_date(self, from_date, add_days):
+        business_days_to_add = add_days
+        current_date = from_date
+        while business_days_to_add > 0:
+            current_date += timedelta(days=1)
+            weekday = current_date.weekday()
+            if weekday >= 5:
+                continue
+            business_days_to_add -= 1
+        return current_date
+
     @http.route()
     def extra_info(self, **post):
         result = super(WebsiteSale, self).extra_info(**post)
         config_parameter = request.env['ir.config_parameter'].sudo()
         mindate = config_parameter.get_param('fdm_website.min_delay') or 0
         if mindate:
-            date_min = date.today() + timedelta(days=int(mindate))
+            date_min = self.get_date(date.today(), int(mindate))
             result.qcontext['mindate'] = date_min
         return result
 
