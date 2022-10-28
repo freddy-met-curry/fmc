@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from odoo import http, fields
 from odoo.addons.website_sale.controllers import main
 from odoo.addons.website.controllers.form import WebsiteForm
 from odoo.http import request
 from datetime import date, timedelta, datetime
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class WebsiteSale(main.WebsiteSale):
@@ -24,6 +25,6 @@ class WebsiteSaleForm(WebsiteForm):
     def website_form_saleorder(self, **kwargs):
         if kwargs.get('datetimepickerExtraInfo'):
             order = request.website.sale_get_order()
-            min_date = datetime.strptime(kwargs.get('datetimepickerExtraInfo'), '%m/%d/%Y').date()
+            min_date = datetime.strptime(kwargs.get('datetimepickerExtraInfo'), '%m/%d/%Y %H:%M %p').date()
             order.write({'min_delay': min_date})
         return super(WebsiteSaleForm, self).website_form_saleorder(**kwargs)

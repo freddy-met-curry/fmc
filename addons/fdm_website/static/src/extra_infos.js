@@ -16,7 +16,7 @@ publicWidget.registry.datepicker = publicWidget.Widget.extend({
         var datetimepickerFormat = time.getLangDateFormat();
         var minDate = minDateData;
         $dateGroup.datetimepicker({
-            format : datetimepickerFormat,
+            dateFormat: 'mm-dd-yy',
             pickLevel: 0,
             daysOfWeekDisabled: [0,6],
             minDate: minDate,
