@@ -10,4 +10,14 @@
             </xpath>
         </field>
     </record>
+    <record id="fdm_view_picking_calendar_inherit" model="ir.ui.view">
+        <field name="name">fdm.stock.picking.calendar</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.stock_picking_calendar"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="customer_id"/>
+            </field>
+        </field>
+    </record>
 </odoo>
