@@ -24,4 +24,4 @@ odoo_lint_disable: rst-syntax-error,missing-readme,unnecessary-utf8-coding-comme
 test_log_level : test
 test_log_handlers : odoo.modules.loading:INFO,werkzeug:CRITICAL
 with_coverage: True
-debug: False
+debug: True
