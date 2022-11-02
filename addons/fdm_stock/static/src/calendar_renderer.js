@@ -14,8 +14,8 @@ CalendarRenderer.include({
                 var element = $(info.el);
                 var view = info.view;
                 if (self && self.model && self.model === 'stock.picking'){
-                    if (event && event.extendedProps && event.extendedProps.record && event.extendedProps.record.partner_id){
-                            event.extendedProps.record.display_name = event.extendedProps.record.partner_id[1]
+                    if (event && event.extendedProps && event.extendedProps.record && event.extendedProps.record.customer_id){
+                            event.extendedProps.record.display_name = event.extendedProps.record.customer_id[1]
                     }
                 }
                 self._addEventAttributes(element, event);
