@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fdm_view_picking_form_inherit" model="ir.ui.view">
+        <field name="name">fdm.stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_td_label')]" position="before">
+                <field name="customer_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="fdm_view_picking_calendar_inherit" model="ir.ui.view">
+        <field name="name">fdm.stock.picking.calendar</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.stock_picking_calendar"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="customer_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>
