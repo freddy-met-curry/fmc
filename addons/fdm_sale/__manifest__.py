@@ -9,6 +9,7 @@
     'license': 'LGPL-3',
     'depends': [
         'sale',
+        'sale_stock',
 
     ],
     'data': [

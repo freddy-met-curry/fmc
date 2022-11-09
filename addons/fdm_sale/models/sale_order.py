@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models, api
+from odoo import models
 from odoo.tools import float_compare
 
 
@@ -14,7 +14,7 @@ class SaleOrderLine(models.Model):
         procurements = []
         for line in self:
             line = line.with_company(line.company_id)
-            if line.state != 'sale' or not line.product_id.type in ('consu', 'product'):
+            if line.state != 'sale' or line.product_id.type not in ('consu', 'product'):
                 continue
             qty = line._get_qty_procurement(previous_product_uom_qty)
             if float_compare(qty, line.product_uom_qty, precision_digits=precision) == 0:
@@ -66,7 +66,9 @@ class SaleOrderLine(models.Model):
         if procurements:
             self.env['procurement.group'].run(procurements)
 
-        # This next block is currently needed only because the scheduler trigger is done by picking confirmation rather than stock.move confirmation
+        # This next block is currently needed only because the
+        # scheduler trigger is done by picking confirmation
+        # rather than stock.move confirmation
         orders = self.mapped('order_id')
         for order in orders:
             pickings_to_confirm = order.picking_ids.filtered(lambda p: p.state not in ['cancel', 'done'])
