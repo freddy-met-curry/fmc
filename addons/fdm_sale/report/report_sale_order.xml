@@ -3,8 +3,8 @@
     <template id="fdm_report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
         <xpath expr="//td[@name='td_name']" position="replace">
             <td name="td_name">
-                <span t-field="line.product_id.name"/>
-                <p t-field="line.product_id.description_sale"/>
+                <t t-set="description_name" t-value="line.name.replace('[%s]' %line.product_id.default_code,'')"/>
+                <span t-esc="description_name"/>
             </td>
 
         </xpath>
