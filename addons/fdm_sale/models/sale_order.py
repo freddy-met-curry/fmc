@@ -58,9 +58,6 @@ class SaleOrderLine(models.Model):
                         line.product_id, product_qty, procurement_uom,
                         line.order_id.partner_shipping_id.property_stock_customer,
                         line.name, line.order_id.name, line.order_id.company_id, values))
-
-
-
             else:
                 product_ids = [p.product_id.id for p in procurements]
                 if line.product_id.id in product_ids:
