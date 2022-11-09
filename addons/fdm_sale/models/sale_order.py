@@ -41,28 +41,48 @@ class SaleOrderLine(models.Model):
             line_uom = line.product_uom
             quant_uom = line.product_id.uom_id
             product_qty, procurement_uom = line_uom._adjust_uom_quantities(product_qty, quant_uom)
-
-            product_ids = [p.product_id.id for p in procurements]
-            if line.product_id.id in product_ids:
-                i = 0
-                for p in procurements:
-                    if p.product_id == line.product_id and p.product_uom == line.product_uom:
-                        new_qty = p.product_qty + product_qty
-                        new_p = self.env['procurement.group'].Procurement(
-                            line.product_id, new_qty, procurement_uom,
-                            line.order_id.partner_shipping_id.property_stock_customer,
-                            line.name, line.order_id.name, line.order_id.company_id, values)
-                        procurements.pop(i)
-                        procurements.append(new_p)
-                        i += 1
-                        break
+            if group_id:
+                product_ids = group_id.stock_move_ids.mapped('product_id')
+                if line.product_id in product_ids:
+                    move_id = group_id.stock_move_ids.filtered(lambda m: m.product_id.id == line.product_id.id)
+                    if move_id and len(move_id) == 1:
+                        product_uom_qty = move_id.product_uom_qty + product_qty
+                        move_id.write({'product_uom_qty': product_uom_qty})
                     else:
-                        i += 1
+                        procurements.append(self.env['procurement.group'].Procurement(
+                            line.product_id, product_qty, procurement_uom,
+                            line.order_id.partner_shipping_id.property_stock_customer,
+                            line.name, line.order_id.name, line.order_id.company_id, values))
+                else:
+                    procurements.append(self.env['procurement.group'].Procurement(
+                        line.product_id, product_qty, procurement_uom,
+                        line.order_id.partner_shipping_id.property_stock_customer,
+                        line.name, line.order_id.name, line.order_id.company_id, values))
+
+
+
             else:
-                procurements.append(self.env['procurement.group'].Procurement(
-                    line.product_id, product_qty, procurement_uom,
-                    line.order_id.partner_shipping_id.property_stock_customer,
-                    line.name, line.order_id.name, line.order_id.company_id, values))
+                product_ids = [p.product_id.id for p in procurements]
+                if line.product_id.id in product_ids:
+                    i = 0
+                    for p in procurements:
+                        if p.product_id == line.product_id and p.product_uom == line.product_uom:
+                            new_qty = p.product_qty + product_qty
+                            new_p = self.env['procurement.group'].Procurement(
+                                line.product_id, new_qty, procurement_uom,
+                                line.order_id.partner_shipping_id.property_stock_customer,
+                                line.name, line.order_id.name, line.order_id.company_id, values)
+                            procurements.pop(i)
+                            procurements.append(new_p)
+                            i += 1
+                            break
+                        else:
+                            i += 1
+                else:
+                    procurements.append(self.env['procurement.group'].Procurement(
+                        line.product_id, product_qty, procurement_uom,
+                        line.order_id.partner_shipping_id.property_stock_customer,
+                        line.name, line.order_id.name, line.order_id.company_id, values))
         if procurements:
             self.env['procurement.group'].run(procurements)
 
