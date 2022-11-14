@@ -41,7 +41,7 @@ class SaleOrderLine(models.Model):
             line_uom = line.product_uom
             quant_uom = line.product_id.uom_id
             product_qty, procurement_uom = line_uom._adjust_uom_quantities(product_qty, quant_uom)
-            if group_id:
+            if group_id and group_id.stock_move_ids:
                 product_ids = group_id.stock_move_ids.mapped('product_id')
                 if line.product_id in product_ids:
                     move_id = group_id.stock_move_ids.filtered(lambda m: m.product_id.id == line.product_id.id)
