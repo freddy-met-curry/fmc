@@ -12,7 +12,6 @@
         'account',
     ],
     'data': [
-        'report/report_invoice.xml',
     ],
     'installable': True,
 }
