@@ -3,7 +3,7 @@
     <template id="fdm_report_delivery_document_inherit" inherit_id="stock.report_delivery_document">
         <xpath expr="//div[hasclass('mb32')][1]" position="after">
             <div class="row mt32 mb32">
-                <div t-if="o.nbre_pax" cclass="col-auto">
+                <div t-if="o.nbre_pax" class="col-auto">
                     <strong>Nbr Pax:</strong>
                     <p  t-field="o.nbre_pax"/>
                 </div>
