@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="fdm_report_delivery_document_inherit" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[hasclass('mb32')][1]" position="after">
+            <div class="row mt32 mb32">
+                <div t-if="o.nbre_pax" class="col-auto">
+                    <strong>Nbr Pax:</strong>
+                    <p  t-field="o.nbre_pax"/>
+                </div>
+                <div t-if="o.nbre_staff" class="col-auto">
+                    <strong>Nbr Staff:</strong>
+                    <p t-field="o.nbre_staff"/>
+                </div>
+                <div t-if="o.notes_comp" class="col-auto">
+                    <strong>Additional notes:</strong>
+                    <p  t-field="o.notes_comp"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
