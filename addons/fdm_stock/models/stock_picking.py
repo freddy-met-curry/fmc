@@ -7,6 +7,9 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     customer_id = fields.Many2one('res.partner', compute="_compute_customer", store=True)
+    nbre_pax = fields.Char()
+    nbre_staff = fields.Char()
+    notes_comp = fields.Char('Additional notes')
 
     @api.depends('partner_id')
     def _compute_customer(self):
