@@ -10,8 +10,9 @@
             <xpath expr="//notebook/page[1]" position="inside">
                 <group>
                     <group>
-                        <field name="logo2" widget="image"/>
                         <field name="note_report"/>
+                        <field name="logo2" widget="image"/>
+
                     </group>
                 </group>
             </xpath>
