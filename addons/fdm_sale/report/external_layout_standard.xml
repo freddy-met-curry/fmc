@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="fdm_external_layout_striped" inherit_id="web.external_layout_striped">
+        <xpath expr="//h3[1]" position="after">
+            <img t-if="company.logo2" t-att-src="image_data_uri(company.logo2)"
+                 style="max-height: 45px; padding-left:50px;" alt="Logo2"/>
+
+        </xpath>
+    </template>
+</odoo>

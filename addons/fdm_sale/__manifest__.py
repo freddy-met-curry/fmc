@@ -16,6 +16,7 @@
         'views/sale_views.xml',
         'views/res_company_view.xml',
         'report/report_sale_order.xml',
+        'report/external_layout_standard.xml',
     ],
     'installable': True,
 }

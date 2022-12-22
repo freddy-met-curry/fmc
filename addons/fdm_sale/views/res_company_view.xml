@@ -9,8 +9,10 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook/page[1]" position="inside">
                 <group>
-                    <field name="logo2" widget="image"/>
-                    <field name="note_report"/>
+                    <group>
+                        <field name="logo2" widget="image"/>
+                        <field name="note_report"/>
+                    </group>
                 </group>
             </xpath>
         </field>
