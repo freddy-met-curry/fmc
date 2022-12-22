@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fdm_view_company_form" model="ir.ui.view">
+        <field name="name">fdm.view.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="priority" eval="100"/>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="inside">
+                <group>
+                    <field name="logo2" widget="image"/>
+                    <field name="note_report"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
