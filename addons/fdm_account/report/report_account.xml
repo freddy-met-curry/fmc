@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="fdm_report_report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='total']" position="before">
+            <p t-field="env.company.note_report" style="color:#2c75ff;"/>
+        </xpath>
+        <xpath expr="//div[@name='due_date']" position="replace">
+            <div class="col-auto col-3 mw-100 mb-2"
+                 t-if="o.delivery_dates and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                <strong>Delivery date:</strong>
+                <p class="m-0" t-field="o.delivery_dates"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
