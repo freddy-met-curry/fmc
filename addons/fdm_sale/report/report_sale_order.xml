@@ -17,8 +17,8 @@
                 </div>
             </div>
         </div>
-        <xpath expr="//p[@t-field='doc.note']" position="after">
-            <p t-field="env.company.note_report" style="color:#2c75ff;" />
+        <xpath expr="//div[@id='total']" position="before">
+            <p t-field="env.company.note_report" style="color:#2c75ff;"/>
         </xpath>
     </template>
 </odoo>
