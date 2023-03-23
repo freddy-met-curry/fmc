@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_production_document">
+        <t t-call="web.external_layout">
+            <t t-set="docs_list" t-value="docs._get_tab_daily_production()"/>
+        </t>
+    </template>
+
+    <template id="report_production">
+        <t t-call="web.html_container">
+            <t t-call="fdm_mrp.report_production_document"/>
+        </t>
+    </template>
+
+    <record id="action_report_production" model="ir.actions.report">
+        <field name="name">Daily Production</field>
+        <field name="model">mrp.production</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fdm_mrp.report_production</field>
+        <field name="report_file">fdm_mrp.report_production</field>
+        <field name="print_report_name">Daily Production</field>
+        <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

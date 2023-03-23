@@ -12,6 +12,7 @@
         'fdm_account',
         'fdm_sale',
         'fdm_stock',
+        'fdm_mrp',
     ],
     'application': True,
 }
