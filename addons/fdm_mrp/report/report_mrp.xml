@@ -27,7 +27,7 @@
                                     <span t-esc="product.name"/>
                                 </td>
                                 <td>
-                                    <span t-esc="line.get('products').get(product_id)"/>
+                                    <span t-esc="line.get('products').get(product_id)" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                 </td>
                             </tr>
                         </t>
@@ -56,7 +56,7 @@
                                     <span t-esc="client"/>
                                 </td>
                                 <td>
-                                    <span t-esc="line.get('clients').get(client)"/>
+                                    <span t-esc="line.get('clients').get(client)" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                 </td>
                             </tr>
                         </t>

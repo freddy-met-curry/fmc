@@ -12,7 +12,7 @@ class MrpProduction(models.Model):
             [('id', 'in', self.ids)], ['date_planned_start'],
             groupby=['date_planned_start:day', 'date_planned_start:month',
                      'date_planned_start:year', 'product_id'],
-            orderby='date_planned_start DESC')
+            orderby='date_planned_start ASC')
         if type == 'product':
             for record in daily_production_data:
                 products = {}
