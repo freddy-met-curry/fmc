@@ -3,6 +3,32 @@
     <template id="report_production_document">
         <t t-call="web.external_layout">
             <t t-set="docs_list" t-value="docs._get_tab_daily_production()"/>
+            <div class="page">
+                <div class="oe_structure"/>
+                <h2>Daily Production by product</h2>
+                <table class="table table-sm o_main_table">
+                    <t t-foreach="docs_list" t-as="line">
+                        <tr>
+                            <td colspan="2">
+                                <strong t-esc="line.get('date_planned')"/>
+                            </td>
+                        </tr>
+                        <t t-foreach="line.get('products')" t-as="product_id">
+                            <tr>
+                                <t t-set="product" t-value="env['product.product'].browse(product_id)"/>
+                                <td>
+                                    <span t-esc="product.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line.get('products').get(product_id)"/>
+                                </td>
+                            </tr>
+                        </t>
+
+
+                    </t>
+                </table>
+            </div>
         </t>
     </template>
 
