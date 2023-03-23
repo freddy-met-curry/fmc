@@ -1,7 +1,7 @@
 {
     'name': "Freddymetcurry Profile",
     'summary': """""",
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.0.1',
     'author': 'Eezee-It',
     'website': 'http://www.eezee-it.com',
     'category': 'Customisation',

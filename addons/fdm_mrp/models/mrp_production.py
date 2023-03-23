@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models
 
 
 class MrpProduction(models.Model):
@@ -23,7 +23,8 @@ class MrpProduction(models.Model):
                         products[mo.product_id.id] = mo.product_qty
                     else:
                         products[mo.product_id.id] += mo.product_qty
-                data.append({'date_planned': record.get('date_planned_start:day'), 'products': products, 'mo': mo_ids.ids})
+                data.append(
+                    {'date_planned': record.get('date_planned_start:day'), 'products': products, 'mo': mo_ids.ids})
         if type == 'client':
             for record in daily_production_data:
                 clients = {}
@@ -34,5 +35,6 @@ class MrpProduction(models.Model):
                         clients[mo.origin] = mo.product_qty
                     else:
                         clients[mo.origin] += mo.product_qty
-                data.append({'date_planned': record.get('date_planned_start:day'), 'clients': clients, 'mo': mo_ids.ids})
+                data.append(
+                    {'date_planned': record.get('date_planned_start:day'), 'clients': clients, 'mo': mo_ids.ids})
         return data
