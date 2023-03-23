@@ -2,12 +2,19 @@
 <odoo>
     <template id="report_production_document">
         <t t-call="web.external_layout">
-            <t t-set="docs_list" t-value="docs._get_tab_daily_production()"/>
+            <t t-set="daily_product_list" t-value="docs._get_tab_daily_production('product')"/>
+            <t t-set="daily_client_list" t-value="docs._get_tab_daily_production('client')"/>
             <div class="page">
                 <div class="oe_structure"/>
                 <h2>Daily Production by product</h2>
                 <table class="table table-sm o_main_table">
-                    <t t-foreach="docs_list" t-as="line">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_product" class="text-left">Product</th>
+                            <th name="th_product" class="text-left">Quantity</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="daily_product_list" t-as="line">
                         <tr>
                             <td colspan="2">
                                 <strong t-esc="line.get('date_planned')"/>
@@ -21,6 +28,35 @@
                                 </td>
                                 <td>
                                     <span t-esc="line.get('products').get(product_id)"/>
+                                </td>
+                            </tr>
+                        </t>
+
+
+                    </t>
+                </table>
+                <br/>
+                <h2>Daily Production by client</h2>
+                <table class="table table-sm o_main_table">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_product" class="text-left">Client</th>
+                            <th name="th_product" class="text-left">Quantity</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="daily_client_list" t-as="line">
+                        <tr>
+                            <td colspan="2">
+                                <strong t-esc="line.get('date_planned')"/>
+                            </td>
+                        </tr>
+                        <t t-foreach="line.get('clients')" t-as="client">
+                            <tr>
+                                <td>
+                                    <span t-esc="client"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line.get('clients').get(client)"/>
                                 </td>
                             </tr>
                         </t>
