@@ -74,6 +74,8 @@
                     <thead style="display: table-row-group">
                         <tr>
                             <th name="th_product" class="text-left">Client</th>
+                            <th name="th_product" class="text-left">SO</th>
+                            <th name="th_product" class="text-left">Prouduct</th>
                             <th name="th_product" class="text-left">Quantity</th>
                         </tr>
                     </thead>
@@ -84,7 +86,7 @@
                             </td>
                             <t t-set="productions_names"
                                t-value="', '.join(env['mrp.production'].browse(line.get('mo_ids')).mapped('name'))"/>
-                            <td>
+                            <td colspan="3">
                                 <span t-esc="productions_names"/>
                             </td>
                         </tr>
@@ -95,7 +97,22 @@
                                     <span t-esc="partner_names"/>
                                 </td>
                                 <td>
-                                    <span t-esc="line.get('clients').get(client)"
+                                    <span t-esc="client"/>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </t>
+                        <t t-foreach="line.get('products')" t-as="product">
+                            <t t-set="product_id" t-value="env['product.product'].browse(product)"/>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <span t-esc="product_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line.get('products').get(product)"
                                           t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                 </td>
                             </tr>
