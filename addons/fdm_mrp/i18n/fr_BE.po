@@ -45,3 +45,19 @@ msgstr "Produit"
 #: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
 msgid "Quantity"
 msgstr "Quantité"
+
+#. module: fdm_mrp
+#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
+msgid ""
+"<strong>\n"
+"                                    <i>Components</i>\n"
+"                                </strong>"
+msgstr "<strong><i>Composants</i></strong>"
+
+#. module: fdm_mrp
+#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
+msgid ""
+"<strong>\n"
+"                                    <i>Products</i>\n"
+"                                </strong>"
+msgstr "<strong><i>Produits</i></strong>"
