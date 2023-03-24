@@ -16,12 +16,15 @@
                     </thead>
                     <t t-foreach="daily_product_list" t-as="line">
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 <strong t-esc="line.get('date_planned')"/>
                             </td>
+
+                        </tr>
+                        <tr>
                             <t t-set="productions_names"
                                t-value="', '.join(env['mrp.production'].browse(line.get('mo_ids')).mapped('name'))"/>
-                            <td>
+                            <td colspan="2">
                                 <span t-esc="productions_names"/>
                             </td>
                         </tr>
@@ -102,7 +105,8 @@
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <t t-set="productions_ids" t-value="env['mrp.production'].browse(line.get('mo_ids')).filtered(lambda p: p.origin ==client)"/>
+                            <t t-set="productions_ids"
+                               t-value="env['mrp.production'].browse(line.get('mo_ids')).filtered(lambda p: p.origin ==client)"/>
                             <t t-foreach="productions_ids" t-as="production">
                                 <tr>
                                     <td></td>
