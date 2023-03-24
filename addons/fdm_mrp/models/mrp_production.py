@@ -16,6 +16,7 @@ class MrpProduction(models.Model):
         if type == 'product':
             for record in daily_production_data:
                 products = {}
+                components = {}
                 domain = record.get('__domain')
                 mo_ids = self.search(domain)
                 for mo in mo_ids:
@@ -23,8 +24,17 @@ class MrpProduction(models.Model):
                         products[mo.product_id.id] = mo.product_qty
                     else:
                         products[mo.product_id.id] += mo.product_qty
+                    for line in mo.move_raw_ids:
+                        if line.product_id.id not in components.keys():
+                            components[line.product_id.id] = line.product_uom_qty
+                        else:
+                            components[line.product_id.id] += line.product_uom_qty
+
                 data.append(
-                    {'date_planned': record.get('date_planned_start:day'), 'products': products, 'mo': mo_ids.ids})
+                    {'date_planned': record.get('date_planned_start:day'),
+                     'products': products,
+                     'mo_ids': mo_ids.ids,
+                     'components': components})
         if type == 'client':
             for record in daily_production_data:
                 clients = {}
@@ -36,5 +46,5 @@ class MrpProduction(models.Model):
                     else:
                         clients[mo.origin] += mo.product_qty
                 data.append(
-                    {'date_planned': record.get('date_planned_start:day'), 'clients': clients, 'mo': mo_ids.ids})
+                    {'date_planned': record.get('date_planned_start:day'), 'clients': clients, 'mo_ids': mo_ids.ids})
         return data

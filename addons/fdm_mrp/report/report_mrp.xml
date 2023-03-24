@@ -16,8 +16,40 @@
                     </thead>
                     <t t-foreach="daily_product_list" t-as="line">
                         <tr>
-                            <td colspan="2">
+                            <td>
                                 <strong t-esc="line.get('date_planned')"/>
+                            </td>
+                            <t t-set="productions_names"
+                               t-value="', '.join(env['mrp.production'].browse(line.get('mo_ids')).mapped('name'))"/>
+                            <td>
+                                <span t-esc="productions_names"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    <i>Components</i>
+                                </strong>
+                            </td>
+                        </tr>
+
+                        <t t-foreach="line.get('components')" t-as="component">
+                            <tr>
+                                <t t-set="product" t-value="env['product.product'].browse(component)"/>
+                                <td>
+                                    <span t-esc="product.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line.get('components').get(component)"
+                                          t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    <i>Products</i>
+                                </strong>
                             </td>
                         </tr>
                         <t t-foreach="line.get('products')" t-as="product_id">
@@ -27,7 +59,8 @@
                                     <span t-esc="product.name"/>
                                 </td>
                                 <td>
-                                    <span t-esc="line.get('products').get(product_id)" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                    <span t-esc="line.get('products').get(product_id)"
+                                          t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                 </td>
                             </tr>
                         </t>
@@ -56,7 +89,8 @@
                                     <span t-esc="client"/>
                                 </td>
                                 <td>
-                                    <span t-esc="line.get('clients').get(client)" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                    <span t-esc="line.get('clients').get(client)"
+                                          t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                 </td>
                             </tr>
                         </t>
