@@ -48,3 +48,13 @@ class MrpProduction(models.Model):
                 data.append(
                     {'date_planned': record.get('date_planned_start:day'), 'clients': clients, 'mo_ids': mo_ids.ids})
         return data
+
+    def _get_partner_name(self, origin):
+        partner_name = ''
+        if origin:
+            origin_list = origin.split(',')
+            for name in origin_list:
+                so_id = self.env['sale.order'].search([('name', '=', name)], limit=1)
+                if so_id and so_id.partner_id:
+                    partner_name += '%s ' % so_id.partner_id.display_name
+        return partner_name

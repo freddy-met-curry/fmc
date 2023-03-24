@@ -79,14 +79,20 @@
                     </thead>
                     <t t-foreach="daily_client_list" t-as="line">
                         <tr>
-                            <td colspan="2">
+                            <td>
                                 <strong t-esc="line.get('date_planned')"/>
+                            </td>
+                            <t t-set="productions_names"
+                               t-value="', '.join(env['mrp.production'].browse(line.get('mo_ids')).mapped('name'))"/>
+                            <td>
+                                <span t-esc="productions_names"/>
                             </td>
                         </tr>
                         <t t-foreach="line.get('clients')" t-as="client">
                             <tr>
                                 <td>
-                                    <span t-esc="client"/>
+                                    <t t-set="partner_names" t-value="docs._get_partner_name(client)"/>
+                                    <span t-esc="partner_names"/>
                                 </td>
                                 <td>
                                     <span t-esc="line.get('clients').get(client)"
