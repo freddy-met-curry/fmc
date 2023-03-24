@@ -102,23 +102,21 @@
                                 <td></td>
                                 <td></td>
                             </tr>
+                            <t t-set="productions_ids" t-value="env['mrp.production'].browse(line.get('mo_ids')).filtered(lambda p: p.origin ==client)"/>
+                            <t t-foreach="productions_ids" t-as="production">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span t-esc="production.product_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="production.product_qty"
+                                              t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                    </td>
+                                </tr>
+                            </t>
                         </t>
-                        <t t-foreach="line.get('products')" t-as="product">
-                            <t t-set="product_id" t-value="env['product.product'].browse(product)"/>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <span t-esc="product_id.name"/>
-                                </td>
-                                <td>
-                                    <span t-esc="line.get('products').get(product)"
-                                          t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
-                                </td>
-                            </tr>
-                        </t>
-
-
                     </t>
                 </table>
             </div>
