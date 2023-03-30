@@ -107,6 +107,8 @@
                             </tr>
                             <t t-set="productions_ids"
                                t-value="env['mrp.production'].browse(line.get('mo_ids')).filtered(lambda p: p.origin ==client)"/>
+                            <t t-set="bom_lines_menu_ids"
+                               t-value="env['mrp.bom.line'].browse(line.get('bom_line_menu_list'))"/>
                             <t t-foreach="productions_ids" t-as="production">
                                 <tr>
                                     <td></td>
@@ -116,6 +118,26 @@
                                     </td>
                                     <td>
                                         <span t-esc="production.product_qty"
+                                              t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <strong>Subcomponent</strong>
+                                </td>
+                            </tr>
+                            <t t-foreach="bom_lines_menu_ids" t-as="bom_line">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span t-esc="bom_line.product_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="bom_line.product_qty"
                                               t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                     </td>
                                 </tr>
