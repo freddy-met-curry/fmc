@@ -61,3 +61,8 @@ msgid ""
 "                                    <i>Products</i>\n"
 "                                </strong>"
 msgstr "<strong><i>Produits</i></strong>"
+
+#. module: fdm_mrp
+#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
+msgid "<strong>Subcomponent</strong>"
+msgstr "<strong>Sous-composant</strong>"
