@@ -122,10 +122,10 @@
                                     </td>
                                 </tr>
                             </t>
-                            <tr>
+                            <tr t-if="bom_lines_menu_ids">
                                 <td></td>
                                 <td></td>
-                                <td>
+                                <td colspan="2">
                                     <strong>Subcomponent</strong>
                                 </td>
                             </tr>
