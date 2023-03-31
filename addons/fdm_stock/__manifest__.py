@@ -14,8 +14,9 @@
         'calendar',
     ],
     'data': [
+        'data/ir_cron.xml',
         'views/stock_picking.xml',
-        'report/report_deliveryslip.xml'
+        'report/report_deliveryslip.xml',
     ],
     'assets': {
         'web.assets_backend': [
