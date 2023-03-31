@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_production_document">
+        <t t-call="web.external_layout">
+            <t t-set="daily_product_list" t-value="docs._get_tab_daily_production('product')"/>
+            <t t-set="daily_client_list" t-value="docs._get_tab_daily_production('client')"/>
+            <div class="page">
+                <div class="oe_structure"/>
+                <h2>Daily Production by product</h2>
+                <table class="table table-sm o_main_table">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_product" class="text-left">Product</th>
+                            <th name="th_product" class="text-left">Quantity</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="daily_product_list" t-as="line">
+                        <tr>
+                            <td colspan="2">
+                                <strong t-esc="line.get('date_planned')"/>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <t t-set="productions_names"
+                               t-value="', '.join(env['mrp.production'].browse(line.get('mo_ids')).mapped('name'))"/>
+                            <td colspan="2">
+                                <span t-esc="productions_names"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    <i>Components</i>
+                                </strong>
+                            </td>
+                        </tr>
+
+                        <t t-foreach="line.get('components')" t-as="component">
+                            <tr>
+                                <t t-set="product" t-value="env['product.product'].browse(component)"/>
+                                <td>
+                                    <span t-esc="product.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line.get('components').get(component)"
+                                          t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    <i>Products</i>
+                                </strong>
+                            </td>
+                        </tr>
+                        <t t-foreach="line.get('products')" t-as="product_id">
+                            <tr>
+                                <t t-set="product" t-value="env['product.product'].browse(product_id)"/>
+                                <td>
+                                    <span t-esc="product.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line.get('products').get(product_id)"
+                                          t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                </td>
+                            </tr>
+                        </t>
+
+
+                    </t>
+                </table>
+                <br/>
+                <h2>Daily Production by client</h2>
+                <table class="table table-sm o_main_table">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_product" class="text-left">Client</th>
+                            <th name="th_product" class="text-left">SO</th>
+                            <th name="th_product" class="text-left">Prouduct</th>
+                            <th name="th_product" class="text-left">Quantity</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="daily_client_list" t-as="line">
+                        <tr>
+                            <td>
+                                <strong t-esc="line.get('date_planned')"/>
+                            </td>
+                            <t t-set="productions_names"
+                               t-value="', '.join(env['mrp.production'].browse(line.get('mo_ids')).mapped('name'))"/>
+                            <td colspan="3">
+                                <span t-esc="productions_names"/>
+                            </td>
+                        </tr>
+                        <t t-foreach="line.get('clients')" t-as="client">
+                            <tr>
+                                <td>
+                                    <t t-set="partner_names" t-value="docs._get_partner_name(client)"/>
+                                    <span t-esc="partner_names"/>
+                                </td>
+                                <td>
+                                    <span t-esc="client"/>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <t t-set="productions_ids"
+                               t-value="env['mrp.production'].browse(line.get('mo_ids')).filtered(lambda p: p.origin ==client)"/>
+                            <t t-set="bom_lines_menu_ids"
+                               t-value="env['mrp.bom.line'].browse(line.get('bom_line_menu_list'))"/>
+                            <t t-foreach="productions_ids" t-as="production">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span t-esc="production.product_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="production.product_qty"
+                                              t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr t-if="bom_lines_menu_ids">
+                                <td></td>
+                                <td></td>
+                                <td colspan="2">
+                                    <strong>Subcomponent</strong>
+                                </td>
+                            </tr>
+                            <t t-foreach="bom_lines_menu_ids" t-as="bom_line">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <span t-esc="bom_line.product_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="bom_line.product_qty"
+                                              t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </t>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_production">
+        <t t-call="web.html_container">
+            <t t-call="fdm_mrp.report_production_document"/>
+        </t>
+    </template>
+
+    <record id="action_report_production" model="ir.actions.report">
+        <field name="name">Daily Production</field>
+        <field name="model">mrp.production</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fdm_mrp.report_production</field>
+        <field name="report_file">fdm_mrp.report_production</field>
+        <field name="print_report_name">Daily Production</field>
+        <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
