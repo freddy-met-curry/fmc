@@ -28,7 +28,7 @@ class ProductTemplate(models.Model):
                     delivery_date = datetime.strptime(line.get('delivery_date'), '%d/%m/%Y').date()
                     if fields.Date.today() < delivery_date and line.get('reservation'):
                         to_unreserve.append(line.get('document_out').id)
-                    elif fields.Date.today() >= delivery_date and not line.get('replenishment_filled'):
+                    elif fields.Date.today() >= delivery_date:
                         to_reserve.append(line.get('document_out').id)
         for mo in mo_obj.browse(to_unreserve):
             mo.do_unreserve()
