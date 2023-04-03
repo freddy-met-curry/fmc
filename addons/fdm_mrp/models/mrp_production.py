@@ -40,6 +40,7 @@ class MrpProduction(models.Model):
             for record in daily_production_data:
                 clients = {}
                 bom_line_menu_list = []
+                menu_list = []
                 domain = record.get('__domain')
                 mo_ids = self.search(domain)
                 for mo in mo_ids:
@@ -51,6 +52,7 @@ class MrpProduction(models.Model):
                                 product_bom_menu_ids = sale_id.order_line.filtered(
                                     lambda p: p.product_id.is_menu).mapped('product_id')
                                 if product_bom_menu_ids:
+                                    menu_list.extend(product_bom_menu_ids.ids)
                                     bom_ids = bom_obj.search(
                                         [('type', '=', 'phantom'), '|', '|',
                                          ('byproduct_ids.product_id', 'in', product_bom_menu_ids.ids),
@@ -64,6 +66,7 @@ class MrpProduction(models.Model):
                 data.append(
                     {'date_planned': record.get('date_planned_start:day'),
                      'clients': clients,
+                     'menu_list': menu_list,
                      'bom_line_menu_list': bom_line_menu_list,
                      'mo_ids': mo_ids.ids})
         return data

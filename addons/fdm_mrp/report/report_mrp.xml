@@ -123,6 +123,8 @@
                                 </tr>
                             </t>
                             <tr t-if="bom_lines_menu_ids">
+                                <t t-set="menu_product"
+                               t-value="env['product.product'].browse(line.get('menu_list'))"/>
                                 <td></td>
                                 <td></td>
                                 <td colspan="2">
@@ -161,7 +163,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">fdm_mrp.report_production</field>
         <field name="report_file">fdm_mrp.report_production</field>
-        <field name="print_report_name">Daily Production</field>
+        <field name="print_report_name">'Daily Production'</field>
         <field name="binding_model_id" ref="mrp.model_mrp_production"/>
         <field name="binding_type">report</field>
     </record>
