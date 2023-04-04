@@ -84,3 +84,19 @@ msgstr "<strong>Détail des articles à produire</strong>"
 #: model:ir.model.fields,field_description:fdm_mrp.field_product_template__is_menu
 msgid "Details of the articles to be produced"
 msgstr "Détail des articles à produire"
+
+#. module: fdm_mrp
+#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
+msgid "Product"
+msgstr "Produit"
+
+#. module: fdm_mrp
+#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
+msgid "<strong>Product</strong>"
+msgstr "<strong>Produit</strong>"
+
+#. module: fdm_mrp
+#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
+msgid "Subcomponent"
+msgstr "Sous-composant"
+
