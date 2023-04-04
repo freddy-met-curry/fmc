@@ -102,19 +102,17 @@
                                 <td>
                                     <span t-esc="client"/>
                                 </td>
-                                <td></td>
-                                <td></td>
+                                <td colspan="2"/>
                             </tr>
                             <tr t-if="line.get('mo_products')">
-                                <td colspan="2">
-                                </td>
+                                <td colspan="2"/>
                                 <td colspan="2">
                                     <strong>Product</strong>
                                 </td>
                             </tr>
                             <t t-foreach="line.get('mo_products')" t-as="mo_product">
                                 <tr>
-                                    <td colspan="2"></td>
+                                    <td colspan="2"/>
                                     <td>
                                         <span t-esc="mo_product.get('product_id')[1]"/>
                                     </td>
@@ -128,7 +126,7 @@
                                 <td colspan="2">
                                 </td>
                                 <td colspan="2">
-                                    <strong>Menu</strong>
+                                    <strong>Details of the articles to be produced</strong>
                                 </td>
                             </tr>
                             <t t-set="menu_product"

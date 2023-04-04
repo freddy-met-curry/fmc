@@ -65,3 +65,22 @@ msgstr "<strong><i>Produits</i></strong>"
 #: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
 msgid "<strong>Subcomponent</strong>"
 msgstr "<strong>Sous-composant</strong>"
+
+#. module: fdm_mrp
+#: model:ir.model.fields,help:fdm_mrp.field_product_product__is_menu
+#: model:ir.model.fields,help:fdm_mrp.field_product_template__is_menu
+msgid ""
+"This field allows you to detail the items of the nomenclature to be produced"
+" for the products to be delivered to the customer on the production sheet"
+msgstr "Cette case permet de détailler les articles de la nomenclatures à produire pour les articles à livrer au client sur la feuille de production"
+
+#. module: fdm_mrp
+#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
+msgid "<strong>Details of the articles to be produced</strong>"
+msgstr "<strong>Détail des articles à produire</strong>"
+
+#. module: fdm_mrp
+#: model:ir.model.fields,field_description:fdm_mrp.field_product_product__is_menu
+#: model:ir.model.fields,field_description:fdm_mrp.field_product_template__is_menu
+msgid "Details of the articles to be produced"
+msgstr "Détail des articles à produire"
