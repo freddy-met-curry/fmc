@@ -109,7 +109,7 @@
                                 <td colspan="2">
                                 </td>
                                 <td colspan="2">
-                                    <strong>Prouduct</strong>
+                                    <strong>Product</strong>
                                 </td>
                             </tr>
                             <t t-foreach="line.get('mo_products')" t-as="mo_product">
