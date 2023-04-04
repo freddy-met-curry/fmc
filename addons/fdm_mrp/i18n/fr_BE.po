@@ -21,10 +21,9 @@ msgid "Client"
 msgstr "Client"
 
 #. module: fdm_mrp
-#: model:ir.actions.report,name:fdm_mrp.action_report_production
 #: model:ir.actions.report,print_report_name:fdm_mrp.action_report_production
-msgid "Daily Production"
-msgstr "Production journalière"
+msgid "'Daily Production'"
+msgstr "'Production journalière'"
 
 #. module: fdm_mrp
 #: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
