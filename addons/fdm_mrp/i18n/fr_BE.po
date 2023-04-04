@@ -87,11 +87,6 @@ msgstr "Détail des articles à produire"
 
 #. module: fdm_mrp
 #: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
-msgid "Product"
-msgstr "Produit"
-
-#. module: fdm_mrp
-#: model_terms:ir.ui.view,arch_db:fdm_mrp.report_production_document
 msgid "<strong>Product</strong>"
 msgstr "<strong>Produit</strong>"
 
