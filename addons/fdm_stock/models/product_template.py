@@ -38,7 +38,8 @@ class ProductTemplate(models.Model):
                         delivery_date = picking_id.scheduled_date.date()
                         if fields.Date.today() < delivery_date and line.get('reservation'):
                             to_unreserve.append(line.get('move_out').id)
-                        elif fields.Date.today() >= delivery_date and line.get('move_out').state in ('confirmed', 'partially_available'):
+                        elif fields.Date.today() >= delivery_date and line.get('move_out').state in (
+                                'confirmed', 'partially_available'):
                             to_reserve.append(line.get('move_out').id)
         for move in move_obj.browse(to_unreserve):
             move._do_unreserve()
