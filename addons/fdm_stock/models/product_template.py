@@ -7,11 +7,12 @@ from datetime import datetime
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    def action_auto_unreser_reserv_stock(self, product_ids=False):
-        product_template_ids = self.search([('detailed_type', '=', 'product')])
-        mo_obj = self.env['mrp.production']
-        if product_ids:
-            product_template_ids = self.search([('id', 'in', product_ids)])
+    is_auto_reser_unreserv = fields.Boolean('Automate reserve/unreserve')
+
+    def action_auto_unreser_reserv_stock(self):
+        product_template_ids = self.search([('detailed_type', '=', 'product'),
+                                            ('is_auto_reser_unreserv', '=', True)])
+        move_obj = self.env['stock.move']
         product_replenishment_obj = self.env['report.stock.report_product_product_replenishment']
         warehouse = self.env['stock.warehouse'].browse(product_replenishment_obj.get_warehouses()[0]['id'])
         wh_location_ids = [loc['id'] for loc in self.env['stock.location'].search_read(
@@ -25,12 +26,21 @@ class ProductTemplate(models.Model):
                                                                 wh_location_ids)
             for line in lines:
                 if line.get('document_out') and line.get('document_out')._name == 'mrp.production':
-                    delivery_date = datetime.strptime(line.get('delivery_date'), '%d/%m/%Y').date()
-                    if fields.Date.today() < delivery_date and line.get('reservation'):
-                        to_unreserve.append(line.get('document_out').id)
-                    elif fields.Date.today() >= delivery_date:
-                        to_reserve.append(line.get('document_out').id)
-        for mo in mo_obj.browse(to_unreserve):
-            mo.do_unreserve()
-        for mo_id in mo_obj.browse(to_reserve):
-            mo_id.action_assign()
+                    if line.get('move_out'):
+                        delivery_date = datetime.strptime(line.get('delivery_date'), '%d/%m/%Y').date()
+                        if fields.Date.today() < delivery_date and line.get('reservation'):
+                            to_unreserve.append(line.get('move_out').id)
+                        elif fields.Date.today() >= delivery_date:
+                            to_reserve.append(line.get('move_out').id)
+                elif line.get('document_out') and line.get('document_out')._name == 'sale.order':
+                    if line.get('move_out') and line.get('move_out').picking_id:
+                        picking_id = line.get('move_out').picking_id
+                        delivery_date = picking_id.scheduled_date.date()
+                        if fields.Date.today() < delivery_date and line.get('reservation'):
+                            to_unreserve.append(line.get('move_out').id)
+                        elif fields.Date.today() >= delivery_date and line.get('move_out').state in ('confirmed', 'partially_available'):
+                            to_reserve.append(line.get('move_out').id)
+        for move in move_obj.browse(to_unreserve):
+            move._do_unreserve()
+        for move_id in move_obj.browse(to_reserve):
+            move_id._action_assign()

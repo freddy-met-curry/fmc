@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     'name': 'Freddymetcurry Stock',
-    'version': '15.0.1.0.4',
+    'version': '15.0.1.0.5',
     'author': 'Eezee-It',
     'website': 'http://www.eezee-it.com',
     'category': 'Inventory',
@@ -16,6 +16,7 @@
     'data': [
         'data/ir_cron.xml',
         'views/stock_picking.xml',
+        'views/product_template.xml',
         'report/report_deliveryslip.xml',
     ],
     'assets': {

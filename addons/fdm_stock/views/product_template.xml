@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fdm_stock_product_normal_form_view" model="ir.ui.view">
+        <field name="name">fdm.stock.product.product.view.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="is_auto_reser_unreserv"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="fdm_stock_product_temp_form_view" model="ir.ui.view">
+        <field name="name">fdm.stock.product.temp.view.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="is_auto_reser_unreserv"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
