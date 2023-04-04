@@ -78,7 +78,7 @@
                         <tr>
                             <th name="th_product" class="text-left">Client</th>
                             <th name="th_product" class="text-left">SO</th>
-                            <th name="th_product" class="text-left">Prouduct</th>
+                            <th name="th_product" class="text-left"></th>
                             <th name="th_product" class="text-left">Quantity</th>
                         </tr>
                     </thead>
@@ -105,41 +105,57 @@
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <t t-set="productions_ids"
-                               t-value="env['mrp.production'].browse(line.get('mo_ids')).filtered(lambda p: p.origin ==client)"/>
-                            <t t-set="bom_lines_menu_ids"
-                               t-value="env['mrp.bom.line'].browse(line.get('bom_line_menu_list'))"/>
-                            <t t-foreach="productions_ids" t-as="production">
+                            <tr t-if="line.get('mo_products')">
+                                <td colspan="2">
+                                </td>
+                                <td colspan="2">
+                                    <strong>Prouduct</strong>
+                                </td>
+                            </tr>
+                            <t t-foreach="line.get('mo_products')" t-as="mo_product">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td colspan="2"></td>
                                     <td>
-                                        <span t-esc="production.product_id.name"/>
+                                        <span t-esc="mo_product.get('product_id')[1]"/>
                                     </td>
                                     <td>
-                                        <span t-esc="production.product_qty"
+                                        <span t-esc="mo_product.get('product_qty')"
                                               t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                     </td>
                                 </tr>
                             </t>
-                            <tr t-if="bom_lines_menu_ids">
-                                <t t-set="menu_product"
-                               t-value="env['product.product'].browse(line.get('menu_list'))"/>
-                                <td></td>
-                                <td></td>
+                            <tr t-if="line.get('menu_list')">
                                 <td colspan="2">
-                                    <strong>Subcomponent</strong>
+                                </td>
+                                <td colspan="2">
+                                    <strong>Menu</strong>
                                 </td>
                             </tr>
-                            <t t-foreach="bom_lines_menu_ids" t-as="bom_line">
+                            <t t-set="menu_product"
+                               t-value="env['product.product'].browse(line.get('menu_list'))"/>
+                            <t t-foreach="menu_product" t-as="menu">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">
+                                        <span t-esc="menu.name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr t-if="line.get('bom_line_menu')">
+                                <td colspan="2">
+                                </td>
+                                <td colspan="2">
+                                    <strong t-if="line.get('bom_line_menu')">Subcomponent</strong>
+                                </td>
+                            </tr>
+                            <t t-foreach="line.get('bom_line_menu')" t-as="bom_line">
+                                <tr>
+                                    <td colspan="2"/>
                                     <td>
-                                        <span t-esc="bom_line.product_id.name"/>
+                                        <span t-esc="bom_line.get('product_id')[1]"/>
                                     </td>
                                     <td>
-                                        <span t-esc="bom_line.product_qty"
+                                        <span t-esc="bom_line.get('product_qty')"
                                               t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                     </td>
                                 </tr>
