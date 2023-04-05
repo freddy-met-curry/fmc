@@ -11,7 +11,7 @@
                     <thead style="display: table-row-group">
                         <tr>
                             <th name="th_product" class="text-left">Product</th>
-                            <th name="th_product" class="text-left">Quantity</th>
+                            <th name="th_qty" class="text-left">Quantity</th>
                         </tr>
                     </thead>
                     <t t-foreach="daily_product_list" t-as="line">
@@ -76,10 +76,10 @@
                 <table class="table table-sm o_main_table">
                     <thead style="display: table-row-group">
                         <tr>
-                            <th name="th_product" class="text-left">Client</th>
-                            <th name="th_product" class="text-left">SO</th>
+                            <th name="th_client" class="text-left">Client</th>
+                            <th name="th_so" class="text-left">SO</th>
                             <th name="th_product" class="text-left"></th>
-                            <th name="th_product" class="text-left">Quantity</th>
+                            <th name="th_qty" class="text-left">Quantity</th>
                         </tr>
                     </thead>
                     <t t-foreach="daily_client_list" t-as="line">
