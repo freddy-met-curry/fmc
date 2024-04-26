@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.website.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <setting id="website_checkout_registration" position="after">
+                <setting id="website_sale_delivery_slot" title=" Manage delivery time slots"
+                         string="Delivery Schedule" help="Set available delivery slots for users to choose at checkout">
+                    <field name="delivery_slot_calendar_id" class="w-75"/>
+                    <div>Propose delivery slots up to <field name="delivery_slot_advance_days" class="oe_inline"/> days in advance.</div>
+                </setting>
+            </setting>
+        </field>
+    </record>
+</odoo>

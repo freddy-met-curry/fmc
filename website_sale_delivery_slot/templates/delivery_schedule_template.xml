@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="checkout_delivery_slot" name="delivery_slot">
+        <t t-call="website_sale.checkout_layout">
+            <t t-set="additional_title">Delivery Slot</t>
+            <t t-set="show_navigation_button" t-value="False"/>
+            <t t-set="oe_structure">
+                <div class="oe_structure" id="checkout_delivery_slot"/>
+            </t>
+            <section>
+                    <h3 class="mb-4">Delivery Slot</h3>
+                    <t t-foreach="errors" t-as="error">
+                        <div class="alert alert-danger" t-if="error" role="alert">
+                            <h4>
+                                <t t-esc="error[0]" />
+                            </h4>
+                            <t t-esc="error[1]" />
+                        </div>
+                    </t>
+                    <form action="/shop/delivery_slot" method="post">
+                        <div class="delivery-slots">
+                            <fieldset>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Monday</th>
+                                            <th scope="col">Tuesday</th>
+                                            <th scope="col">Wednesday</th>
+                                            <th scope="col">Thursday</th>
+                                            <th scope="col">Friday</th>
+                                            <th scope="col">Saturday</th>
+                                            <th scope="col">Sunday</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="slot_calendar" t-as="year">
+                                            <t t-foreach="slot_calendar[year]" t-as="week">
+                                                <tr>
+                                                    <td>
+                                                        <t t-if="slot_calendar[year][week].get(0)">
+                                                            <t t-set="date" t-value="slot_calendar[year][week][0][0][0].date()"/>
+                                                            <label t-att-for="date" class="date-select btn btn-outline-secondary"><span t-esc="date.day" /> <span t-esc="date.strftime('%b')"/></label>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="slot_calendar[year][week].get(1)">
+                                                            <t t-set="date" t-value="slot_calendar[year][week][1][0][0].date()"/>
+                                                            <label t-att-for="date" class="date-select btn btn-outline-secondary"><span t-esc="date.day" /> <span t-esc="date.strftime('%b')"/></label>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="slot_calendar[year][week].get(2)">
+                                                            <t t-set="date" t-value="slot_calendar[year][week][2][0][0].date()"/>
+                                                            <label t-att-for="date" class="date-select btn btn-outline-secondary"><span t-esc="date.day" /> <span t-esc="date.strftime('%b')"/></label>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="slot_calendar[year][week].get(3)">
+                                                            <t t-set="date" t-value="slot_calendar[year][week][3][0][0].date()"/>
+                                                            <label t-att-for="date" class="date-select btn btn-outline-secondary"><span t-esc="date.day" /> <span t-esc="date.strftime('%b')"/></label>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="slot_calendar[year][week].get(4)">
+                                                            <t t-set="date" t-value="slot_calendar[year][week][4][0][0].date()"/>
+                                                            <label t-att-for="date" class="date-select btn btn-outline-secondary"><span t-esc="date.day" /> <span t-esc="date.strftime('%b')"/></label>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="slot_calendar[year][week].get(5)">
+                                                            <t t-set="date" t-value="slot_calendar[year][week][5][0][0].date()"/>
+                                                            <label t-att-for="date" class="date-select btn btn-outline-secondary"><span t-esc="date.day" /> <span t-esc="date.strftime('%b')"/></label>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="slot_calendar[year][week].get(6)">
+                                                            <t t-set="date" t-value="slot_calendar[year][week][6][0][0].date()"/>
+                                                            <label t-att-for="date" class="date-select btn btn-outline-secondary"><span t-esc="date.day" /> <span t-esc="date.strftime('%b')"/></label>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+
+                            <fieldset>
+                                <t t-foreach="slot_calendar" t-as="year">
+                                    <t t-foreach="slot_calendar[year]" t-as="week">
+                                        <t t-foreach="slot_calendar[year][week]" t-as="day">
+                                            <t t-set="date" t-value="slot_calendar[year][week][day][0][0].date()"/>
+                                            <input t-att-id='date' class='date-radio' name='date' type='radio'/>
+                                            <div class="slot-select">
+                                                <legend>Please select your preferred delivery slot on <span t-out="date" t-options="{'widget': 'date', 'format': 'd MMMM'}"/></legend>
+                                                <t t-foreach="slot_calendar[year][week][day]" t-as="slot">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="slot" t-att-value="slot[0]" t-att-id="slot[0]"/>
+                                                        <label class="form-check-label" t-att-for="slot[0]">
+                                                            <t t-out="slot[1]"/>
+                                                        </label>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </t>
+                                    </t>
+                                </t>
+                            </fieldset>
+                        </div>
+
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <t t-call="website_sale.navigation_buttons">
+                            <t t-set="_form_send_navigation" t-value="True"/>
+                            <t t-set="_cta_classes" t-value="'a-submit a-submit-disable a-submit-loading'"/>
+                        </t>
+                    </form>
+            </section>
+        </t>
+    </template>
+
+    <template id="address_on_payment_delivery_slot" inherit_id="website_sale.address_on_payment">
+        <xpath expr="//div[hasclass('card-body')]/div[last()]" position="after">
+            <div t-if="order.commitment_date">
+                <b>Delivery: </b>
+                <span t-esc="order.commitment_date" t-options="{'widget': 'datetime'}" class="address-inline"/> <t t-if="not env.context.get('tz')">UTC</t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
