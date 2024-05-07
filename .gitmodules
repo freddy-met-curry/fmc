@@ -1,5 +1,1 @@
 
-[submodule "niboo/apps"]
-	path = niboo/apps
-	url = git@gitlab.niboo.com:apps/website
-	branch = 17.0
