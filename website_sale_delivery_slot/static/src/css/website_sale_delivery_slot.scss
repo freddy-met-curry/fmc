@@ -1,0 +1,20 @@
+div.delivery-slots {
+  .date-radio,
+  .slot-select {
+    display: none;
+    opacity: 0;
+  }
+  .date-radio:checked+.slot-select {
+    display: block;
+    opacity: 1;
+  }
+  .btn {
+    white-space: nowrap;
+  }
+  .date-select {
+    min-width: 6em;
+  }
+  .table td {
+    min-width: 6em;
+  }
+}
