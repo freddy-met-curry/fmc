@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_payment_method_restriction_partner_form" model="ir.ui.view">
+        <field name="name">sh.payment.method.restriction.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Payment Method" name="sh_payment_method_restriction_page">
+                    <group>
+                        <group string="Payment Acquirers" name="sh_payment_method_restriction_group">
+                            <field name="sh_partner_pay_meth_payment_ids" widget="many2many_tags" options="{'no_create': True}" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
